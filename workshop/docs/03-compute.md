@@ -1,12 +1,13 @@
 ---
-sidebar_position: 6
-title: "Step 6: The computation layer"
+sidebar_position: 3
+title: "Step 3: The runoff function"
 ---
 
-# Step 6: The computation layer
+# Step 3: The runoff function
 
-**Concept:** Keep domain logic out of the UI. The runoff math is pure Python in its own
-module, so it's easy to read and test independently of the components.
+**The premise of this workshop:** you already have a useful Python function, and you want to
+build an app around it. Here that function is a stormwater **runoff calculator**. We'll treat
+it as a given black box — the goal is the app, not the hydrology.
 
 Create `tethysapp/runoff_depth_calculator/compute.py`:
 
@@ -62,42 +63,41 @@ def calculate_runoff(area_acres, precipitation_inches, soil_group, land_use):
     }
 ```
 
-## Call it from the UI
+## All you need to know about it
 
-Import it at the top of `app.py`:
+You don't need to understand the NRCS math to build the app — just the **inputs and
+outputs**:
 
-```python
-from .compute import calculate_runoff
-```
+**Inputs**
 
-Then compute the result when the user picks a land use — extend the Step 4 `Select`
-handler from the previous step:
+| Argument | Meaning |
+| --- | --- |
+| `area_acres` | Area of the selected region, in acres |
+| `precipitation_inches` | A design storm depth, in inches |
+| `soil_group` | One of `"Group A"`–`"Group D"` |
+| `land_use` | One of `"Residential"`, `"Commercial"`, `"Forest"` |
 
-```python
-onChange=lambda val, _: (
-    set_land_use(val),
-    set_active_step(4),
-    set_result(calculate_runoff(area_acres, precip, soil_group, val))
-)
-```
+**Output** — a dict:
 
-Note that we pass `val` — the value the handler just received — to `calculate_runoff`,
-**not** the `land_use` state variable. `set_land_use(val)` only schedules `land_use` to
-update on the *next* render; within this handler `land_use` still holds its previous value
-(`None` the first time). Using `val` ensures the calculation runs with the land use the user
-just selected.
+| Key | Meaning |
+| --- | --- |
+| `cn` | The Curve Number used |
+| `user_volume` | Runoff volume (cubic feet) for the chosen storm |
+| `storms` | A list of design-storm depths (for plotting) |
+| `volumes` | Runoff volume at each storm depth (for plotting) |
+
+That's the contract. The rest of the workshop builds an interface that collects those four
+inputs from the user and displays the result.
 
 ## Key ideas
 
-- **Separation of concerns.** `compute.py` has no Tethys/ReactPy imports. It takes numbers
-  and strings, returns a dict — trivially unit-testable.
-- **The CN method.** Look up a Curve Number, derive retention `S` and abstraction `Ia`,
-  then apply `Q = (P - Ia)² / (P - Ia + S)`. Returns the user's volume plus parallel
-  `storms`/`volumes` lists for charting.
-- **Setters are asynchronous.** A `use_state` setter schedules a re-render; it does not
-  change the local variable in the running handler. Read the fresh value from the event
-  (`val`) rather than the state variable you just set.
+- **Separation of concerns.** `compute.py` has no Tethys or ReactPy imports — it's plain
+  Python that takes numbers and strings and returns a dict, so it's trivial to test on its
+  own.
+- **Design the app around the data contract.** Knowing the function's inputs and outputs is
+  enough to design the UI: four inputs to gather, one result dict to display.
 
 ## What you should see
 
-When you select a land use, `result` is populated in state. We render it next.
+No visible change in the app yet — we've just added the function we're going to build
+around. Next we'll lay out the page.
