@@ -36,16 +36,22 @@ standalone.
 stack), so a plain venv works:
 
 ```bash
-# 1. Create a venv and install Tethys + this app (editable)
+# 1. Create and activate a venv. Activation puts `tethys` on PATH, which
+#    `tethys install -d` needs for its internal `tethys db sync` subprocess.
 python3.12 -m venv .venv          # Tethys targets 3.10; 3.12 is the safe modern choice
-.venv/bin/python -m pip install --upgrade pip setuptools wheel
-.venv/bin/pip install tethys-platform
-.venv/bin/pip install -e .
+source .venv/bin/activate
+pip install --upgrade pip setuptools wheel
+pip install tethys-platform
 
 # 2. Initialize the portal (generates portal_config.yml, configures the database,
 #    runs migrations, and prompts to create a portal superuser). This is the
-#    standard, verified way to initialize a fresh install:
+#    standard, verified way to initialize a fresh install, and must come before
+#    installing the app (the app install syncs into the database):
 tethys quickstart
+
+# 3. Install this app in development mode (editable install + deps + db sync),
+#    run from the app directory (where install.yml lives):
+tethys install -d
 ```
 
 `tethys quickstart` also scaffolds and starts a `hello_world` demo app and launches the dev

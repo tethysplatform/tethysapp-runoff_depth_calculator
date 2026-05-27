@@ -21,28 +21,34 @@ The `-t component` flag selects the ReactPy-based component template (as opposed
 `default` Django-template apps or the `react` template). Accept the prompts (or pass
 `-d` to accept defaults).
 
-## Install the app
+## Initialize the Tethys portal
 
-Install the app into your active Tethys environment in editable mode so code changes are
-picked up without reinstalling:
-
-```bash
-cd tethysapp-runoff_depth_calculator
-pip install -e .
-```
-
-## Initialize and run the portal
-
-If this is a fresh Tethys install, initialize the portal and start the dev server:
+If this is a fresh Tethys install, initialize the portal first:
 
 ```bash
 tethys quickstart
 ```
 
 `tethys quickstart` generates the portal config, configures the database, runs migrations,
-creates a superuser, and starts the development server.
+creates a superuser, and starts the development server. Press `Ctrl+C` to stop that server
+before continuing.
 
-For subsequent runs, just start the server:
+## Install the app
+
+Install the app into your Tethys portal in **development mode**. Run this from inside the
+app directory (where `install.yml` lives):
+
+```bash
+cd tethysapp-runoff_depth_calculator
+tethys install -d
+```
+
+`tethys install -d` does an editable install of the app, installs its dependencies, and
+syncs it into the portal database — which is why the portal must be initialized first.
+
+## Run the app
+
+Start the development server:
 
 ```bash
 tethys manage start
@@ -51,9 +57,11 @@ tethys manage start
 ## Key ideas
 
 - **`tethys scaffold ... -t component`** creates a component-app project from a template.
-- **`pip install -e .`** installs the app in editable mode so code edits are picked up live.
 - **`tethys quickstart`** is a one-shot first-time setup: portal config, database, migrations,
   superuser, and dev server.
+- **`tethys install -d`** installs the app in development mode — an editable install plus
+  dependency installation and a database sync into the portal (so it must run after the
+  portal is initialized).
 
 ## What you should see
 

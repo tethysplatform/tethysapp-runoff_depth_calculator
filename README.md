@@ -39,17 +39,25 @@ required):
 python3.12 -m venv .venv
 source .venv/bin/activate
 
-# Install Tethys Platform and this app (editable)
+# Install Tethys Platform
 pip install --upgrade pip setuptools wheel
 pip install tethys-platform
-pip install -e .
 
 # Initialize the Tethys portal: generates the portal config, configures the
-# database, runs migrations, creates a superuser, and starts the dev server
+# database, runs migrations, creates a superuser, and starts the dev server.
+# (Press Ctrl+C to stop the dev server it launches before continuing.)
 tethys quickstart
+
+# Install this app in development mode. Run from the app directory (where
+# install.yml lives). The portal/database above must be initialized first,
+# because this also syncs the app into the database.
+tethys install -d
+
+# Start the development server
+tethys manage start
 ```
 
-Once running, the app is available at <http://127.0.0.1:8000/apps/runoff-depth-calculator/>.
+The app is available at <http://127.0.0.1:8000/apps/runoff-depth-calculator/>.
 
 ## Development
 
