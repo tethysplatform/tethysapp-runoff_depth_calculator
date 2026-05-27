@@ -133,7 +133,7 @@ def home(lib):
                             onChange=lambda val, _: (
                                 set_land_use(val),
                                 set_active_step(4),
-                                set_result(calculate_runoff(area_acres, precip, soil_group, land_use))
+                                set_result(calculate_runoff(area_acres, precip, soil_group, val))
                             )
                         )
                     ),

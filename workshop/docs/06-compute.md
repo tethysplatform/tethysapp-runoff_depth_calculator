@@ -77,9 +77,15 @@ handler from the previous step:
 onChange=lambda val, _: (
     set_land_use(val),
     set_active_step(4),
-    set_result(calculate_runoff(area_acres, precip, soil_group, land_use))
+    set_result(calculate_runoff(area_acres, precip, soil_group, val))
 )
 ```
+
+Note that we pass `val` — the value the handler just received — to `calculate_runoff`,
+**not** the `land_use` state variable. `set_land_use(val)` only schedules `land_use` to
+update on the *next* render; within this handler `land_use` still holds its previous value
+(`None` the first time). Using `val` ensures the calculation runs with the land use the user
+just selected.
 
 ## Key ideas
 
@@ -88,6 +94,9 @@ onChange=lambda val, _: (
 - **The CN method.** Look up a Curve Number, derive retention `S` and abstraction `Ia`,
   then apply `Q = (P - Ia)² / (P - Ia + S)`. Returns the user's volume plus parallel
   `storms`/`volumes` lists for charting.
+- **Setters are asynchronous.** A `use_state` setter schedules a re-render; it does not
+  change the local variable in the running handler. Read the fresh value from the event
+  (`val`) rather than the state variable you just set.
 
 ## What you should see
 
