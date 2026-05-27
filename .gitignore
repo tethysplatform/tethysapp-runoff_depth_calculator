@@ -3,3 +3,8 @@
 .remember/
 .venv/
 __pycache__/
+
+# Docusaurus workshop site
+workshop/node_modules/
+workshop/build/
+workshop/.docusaurus/
