@@ -3,7 +3,7 @@ requires = ["setuptools>=45", "setuptools_scm[toml]>=6.2"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "tethysapp-ciroh_devcon_2026_example"
+name = "tethysapp-runoff_depth_calculator"
 description =  ""
 readme = "README.rst"
 
@@ -34,7 +34,7 @@ where = ["."]
 include = ["*"]
 
 [tool.setuptools.package-data]
-"tethysapp.ciroh_devcon_2026_example" = [
+"tethysapp.runoff_depth_calculator" = [
     "templates/**/*",
     "public/**/*",
     "resources/**/*",

@@ -4,15 +4,15 @@ from .compute import calculate_runoff
 
 class App(ComponentBase):
     """
-    Tethys app class for CIROH Dev Con 2026 Example.
+    Tethys app class for Runoff Depth Calculator.
     """
 
-    name = "CIROH Dev Con 2026 Example"
+    name = "Runoff Depth Calculator"
     description = ""
-    package = "ciroh_devcon_2026_example"  # WARNING: Do not change this value
+    package = "runoff_depth_calculator"  # WARNING: Do not change this value
     index = "home"
     icon = f"{package}/images/icon.png"
-    root_url = "ciroh-devcon-2026-example"
+    root_url = "runoff-depth-calculator"
     color = "#718093"
     tags = ""
     enable_feedback = False
