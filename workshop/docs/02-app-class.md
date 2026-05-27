@@ -8,7 +8,7 @@ title: "Step 2: The App class & page functions"
 **Concept:** Every Tethys app defines an `App` class. For component apps it subclasses
 `ComponentBase`, and pages are plain Python functions decorated with `@App.page`.
 
-Open `tethysapp/runoff_depth_calculator/app.py`. Set up the app class and a first page:
+Open `tethysapp/runoff_depth_calculator/app.py`. You should see the following:
 
 ```python
 from tethys_sdk.components import ComponentBase
@@ -37,7 +37,7 @@ class App(ComponentBase):
 @App.page
 def home(lib):
     return lib.tethys.Display(
-        lib.m.Title("Runoff Depth Calculator")
+        lib.tethys.Map()
     )
 ```
 
@@ -54,5 +54,4 @@ def home(lib):
 
 ## What you should see
 
-Reload the app. The home page now shows the title "Runoff Depth Calculator". Everything from
-here is adding components inside this `home` function.
+Everything from here is adding components inside this `home` function.
