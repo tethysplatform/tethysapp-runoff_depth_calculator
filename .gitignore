@@ -1,3 +1,5 @@
 *.egg-info
 *.pyc
 .remember/
+.venv/
+__pycache__/
