@@ -5,6 +5,12 @@ workshop on creating **Tethys Component Apps** — apps whose entire UI is defin
 using Tethys's [ReactPy](https://reactpy.dev/)-based component framework instead of Django
 templates.
 
+## Workshop tutorial
+
+A step-by-step workshop that walks through building this app from scratch is published at
+**<https://tethysplatform.github.io/tethysapp-runoff_depth_calculator/>**. The tutorial
+source lives in [`workshop/`](workshop/).
+
 ## What it does
 
 The app estimates stormwater runoff for an urban area using the NRCS Curve Number method:
