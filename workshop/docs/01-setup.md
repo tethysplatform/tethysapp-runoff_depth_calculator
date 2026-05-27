@@ -51,7 +51,7 @@ syncs it into the portal database — which is why the portal must be initialize
 Start the development server:
 
 ```bash
-tethys manage start
+tethys start
 ```
 
 ## Key ideas

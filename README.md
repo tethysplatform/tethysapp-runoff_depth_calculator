@@ -54,7 +54,7 @@ tethys quickstart
 tethys install -d
 
 # Start the development server
-tethys manage start
+tethys start
 ```
 
 The app is available at <http://127.0.0.1:8000/apps/runoff-depth-calculator/>.
@@ -63,7 +63,7 @@ The app is available at <http://127.0.0.1:8000/apps/runoff-depth-calculator/>.
 
 ```bash
 # Start the development server (http://127.0.0.1:8000)
-tethys manage start
+tethys start
 
 # Re-register the app with the portal database after changing app metadata
 tethys db sync

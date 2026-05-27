@@ -62,7 +62,7 @@ server. By default it writes the portal config and SQLite database under `TETHYS
 
 ```bash
 # Start the dev server (http://127.0.0.1:8000; default superuser created during setup)
-tethys manage start
+tethys start
 
 # Re-register apps with the portal database after code/metadata changes
 tethys db sync
