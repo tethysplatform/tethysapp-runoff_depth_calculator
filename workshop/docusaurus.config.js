@@ -13,11 +13,16 @@ const config = {
   projectName: 'tethysapp-runoff_depth_calculator',
 
   onBrokenLinks: 'throw',
-  onBrokenMarkdownLinks: 'throw',
 
   i18n: {
     defaultLocale: 'en',
     locales: ['en'],
+  },
+
+  markdown: {
+    hooks: {
+      onBrokenMarkdownLinks: 'throw',
+    },
   },
 
   presets: [

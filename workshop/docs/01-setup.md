@@ -48,6 +48,13 @@ For subsequent runs, just start the server:
 tethys manage start
 ```
 
+## Key ideas
+
+- **`tethys scaffold ... -t component`** creates a component-app project from a template.
+- **`pip install -e .`** installs the app in editable mode so code edits are picked up live.
+- **`tethys quickstart`** is a one-shot first-time setup: portal config, database, migrations,
+  superuser, and dev server.
+
 ## What you should see
 
 Open [http://127.0.0.1:8000/apps/](http://127.0.0.1:8000/apps/) and log in. Your scaffolded app appears in the app
