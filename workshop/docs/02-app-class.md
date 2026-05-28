@@ -5,8 +5,7 @@ title: "Step 2: The App class & page functions"
 
 # Step 2: The App class & page functions
 
-**Concept:** Every Tethys app defines an `App` class. For component apps it subclasses
-`ComponentBase`, and pages are plain Python functions decorated with `@App.page`.
+**Concept:** Every Tethys Component App defines 1) an `App` class that inherits from the `ComponentBase` subclass and contains the high-level configuration of your app, and 2) one or more functions decorated with `@App.page` that accept a `lib` argument and return a component tree representing the content of the page.
 
 Open `tethysapp/runoff_depth_calculator/app.py`. You should see the following:
 
@@ -49,9 +48,10 @@ def home(lib):
 - **`@App.page`** — turns a function into a page/route. The function name (`home`) matches
   `index`, so it's the landing page.
 - **`lib`** — the single argument every page receives. It's the component library: HTML
-  elements, Tethys components, UI frameworks, maps, and charts all hang off of it. Here
-  `lib.tethys.Display` wraps the page and `lib.m.Title` is a Mantine title.
+  elements, Tethys components, UI frameworks, maps, and charts are all accessed from it. Here
+  `lib.tethys.Display` is the root component and container for the page that right now holds 
+  a `lib.tethys.Map` component.
 
 ## What you should see
 
-Everything from here is adding components inside this `home` function.
+We haven't changed any code yet, so you should still see the single home page of your app, with a title banner and a map filling the remaining space underneath.

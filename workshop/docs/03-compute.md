@@ -5,11 +5,9 @@ title: "Step 3: The runoff function"
 
 # Step 3: The runoff function
 
-**The premise of this workshop:** you already have a useful Python function, and you want to
-build an app around it. Here that function is a stormwater **runoff calculator**. We'll treat
-it as a given black box — the goal is the app, not the hydrology.
+**Recall the premise of this workshop:** you already have a useful Python function and you want to build an app around it. Here that function is a stormwater **runoff calculator**. We'll treat it as a given black box since the goal is the app, not the hydrology.
 
-Create `tethysapp/runoff_depth_calculator/compute.py`:
+Create `tethysapp/runoff_depth_calculator/compute.py` with the following content:
 
 ```python
 def calculate_runoff(area_acres, precipitation_inches, soil_group, land_use):
@@ -65,8 +63,7 @@ def calculate_runoff(area_acres, precipitation_inches, soil_group, land_use):
 
 ## All you need to know about it
 
-You don't need to understand the NRCS math to build the app — just the **inputs and
-outputs**:
+You don't need to understand the NRCS math to build the app — just the **inputs and outputs**:
 
 **Inputs**
 
@@ -77,7 +74,7 @@ outputs**:
 | `soil_group` | One of `"Group A"`–`"Group D"` |
 | `land_use` | One of `"Residential"`, `"Commercial"`, `"Forest"` |
 
-**Output** — a dict:
+**Outputs** — a dict:
 
 | Key | Meaning |
 | --- | --- |
@@ -86,16 +83,22 @@ outputs**:
 | `storms` | A list of design-storm depths (for plotting) |
 | `volumes` | Runoff volume at each storm depth (for plotting) |
 
-That's the contract. The rest of the workshop builds an interface that collects those four
-inputs from the user and displays the result.
+That's the contract. The rest of the workshop builds an interface that collects those four inputs from the user and displays the result.
+
+## Import your "black-box" compute function to app.py to be called there
+
+Add the following to the top of your `tethysapp/runoff_depth_calculator/app.py` script:
+
+```python
+from .compute import calculate_runoff
+```
+
+We will tie this function into the UI, wiring it up to user-driven actions/events later.
 
 ## Key ideas
 
-- **Separation of concerns.** `compute.py` has no Tethys or ReactPy imports — it's plain
-  Python that takes numbers and strings and returns a dict, so it's trivial to test on its
-  own.
-- **Design the app around the data contract.** Knowing the function's inputs and outputs is
-  enough to design the UI: four inputs to gather, one result dict to display.
+- **Separation of concerns.** `compute.py` should contain no component nor application UI logic — it's plain Python that takes numbers and strings and returns a dict, so it's trivial to test on its own.
+- **Design the app around the data contract.** Knowing the function's inputs and outputs is enough to design the UI: four inputs to gather, one result dict to display.
 
 ## What you should see
 

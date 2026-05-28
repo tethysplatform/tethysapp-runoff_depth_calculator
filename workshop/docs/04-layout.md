@@ -5,43 +5,28 @@ title: "Step 4: Page layout"
 
 # Step 4: Page layout
 
-**Concept:** Before adding real content, lay out the page structure. Our app has two
-regions stacked vertically: a map on top, and a step-by-step input panel below. We'll
-build that with a grid and fill it in over the next steps.
+**Concept:** Before adding real content, design the overall page structure. For this application, the vision is to have two sections stacked vertically: a map on top, and a step-by-step input panel below. We'll build that and fill it in over the next steps.
 
-Replace the body of `home` (the `lib.m.Title(...)` from Step 2) with a grid containing two
-full-width columns. We'll use placeholders for now:
+We currently have a map filling the entire space of our app, so we need to configure its height to leave space below for our step-by-step input panel, and then add placeholder for that panel. This can be done as seen below:
 
 ```python
 @App.page
 def home(lib):
     return lib.tethys.Display(
-        lib.m.Grid(
-            lib.m.GridCol(span=12, style=lib.Style(height="70vh"))(
-                lib.m.Text("Map goes here")
-            ),
-            lib.m.GridCol(span=12)(
-                lib.m.Text("Steps go here")
-            ),
-        )
+        lib.tethys.Map(
+            style=lib.Style(height="70vh", marginBottom="1em")
+        ),
+        lib.m.Text("Steps go here")
     )
 ```
 
-## Reading the component syntax
+## Key ideas
 
-This is the core pattern you'll use everywhere, so it's worth slowing down:
-
-- **Props are keyword arguments.** `lib.m.GridCol(span=12, style=...)` configures the
-  component.
-- **Children come from calling the result.** `lib.m.GridCol(span=12)( ...children... )`.
-  So `GridCol(span=12)(Text("..."))` is "a column containing a Text".
-- **`lib.tethys.Display`** wraps the whole page in the app's standard layout.
-- **`lib.m.Grid` / `lib.m.GridCol`** are the Mantine grid. `span=12` means full width (the
-  grid is 12 columns wide), so the two columns stack.
-- **`lib.Style(height="70vh")`** sets inline CSS — the map column is 70% of the viewport
-  height.
+- **`style=`** is the most standard way to customize the intrinsic, visual properties of a component. This takes a dictionary of key-value pairs, where the keys are the properties you are setting.
+- **`lib.Style(...)`** is a helper function that allows you to continue to write pythonic, kwarg-style syntax for the key-value pairs rather than dictionary syntax (e.g. `style=lib.Style(height="100%")` rather than `style={"height": "100%"}`). You may use whichever you prefer.
+- **`height="70vh"`** sets the height to 70% of the browser's available view height (vh)
+- **`marginBottom="1em"`** sets a margin of 1 "em" (the height of a capital "M" in the currently set font) to provide some responsive white space between the map and the steps section.
 
 ## What you should see
 
-Reload the app: two stacked regions, one reading "Map goes here" (tall) and one reading
-"Steps go here". Next we replace the first placeholder with a real map.
+Reload the app and you should now see two sections rendered: the Map and just below it the "Steps go here" placeholder.

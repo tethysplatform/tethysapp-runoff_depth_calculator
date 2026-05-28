@@ -8,12 +8,18 @@ title: "Step 1: Set up & scaffold"
 **Concept:** A Component App is a normal Tethys app project. We start by scaffolding one and
 installing it into a Tethys portal.
 
+## Active your Tethys Python Virtual Environment
+
+If you have not already installed Tethys Platform, follow the [Quick Start](https://docs.tethysplatform.org/en/stable/index.html#quick-start) documentation and then return here.
+
+Now, [Activate your Virtual Environment](https://docs.tethysplatform.org/en/stable/supplementary/virtual_environment.html#activate-environment).
+
 ## Scaffold the app
 
-From a directory where you keep your code, scaffold a new app using the **component**
-template:
+From the command line, navigate to a directory where you'd like to keep your code, then scaffold a new app using the **component** template:
 
 ```bash
+cd /path/to/target/directory
 tethys scaffold runoff_depth_calculator -t component
 ```
 
@@ -21,30 +27,24 @@ The `-t component` flag selects the ReactPy-based component template (as opposed
 `default` Django-template apps or the `react` template). Accept the prompts (or pass
 `-d` to accept defaults).
 
-## Initialize the Tethys portal
-
-If this is a fresh Tethys install, initialize the portal first:
-
-```bash
-tethys quickstart
-```
-
-`tethys quickstart` generates the portal config, configures the database, runs migrations,
-creates a superuser, and starts the development server. Press `Ctrl+C` to stop that server
-before continuing.
-
 ## Install the app
 
-Install the app into your Tethys portal in **development mode**. Run this from inside the
-app directory (where `install.yml` lives):
+Install the app into your Tethys portal in **development mode**.
 
 ```bash
 cd tethysapp-runoff_depth_calculator
 tethys install -d
 ```
 
-`tethys install -d` does an editable install of the app, installs its dependencies, and
-syncs it into the portal database — which is why the portal must be initialized first.
+`tethys install -d` does an editable install of the app, which ensures that your changes to the underlying code will be auto-detected and trigger a restart of the server.
+
+## Run database migrations
+
+If this is your first time installing a Tethys Component app, the Tethys database will also need to be updated.
+
+```bash
+tethys db migrate
+```
 
 ## Run the app
 
@@ -65,6 +65,7 @@ tethys start
 
 ## What you should see
 
-Open [http://127.0.0.1:8000/apps/](http://127.0.0.1:8000/apps/) and log in. Your scaffolded app appears in the app
-library with a default home page. In the next step we'll look at what makes it a component
-app.
+Open [http://127.0.0.1:8000/apps/](http://127.0.0.1:8000/apps/) and log in with `admin:pass`. 
+Your scaffolded app should appear as a card item in the app library. Click on it and your app
+should load, showing a header banner with a full screen map below. You will explore and modify
+the code behind the app in the remaining steps.
