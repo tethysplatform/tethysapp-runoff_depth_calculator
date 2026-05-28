@@ -52,8 +52,8 @@ lib.m.Stepper(active=0)(
 - **`lib.m.Stepper`** shows numbered steps; `active=0` hardcodes it on the first step for now. Each child is a **`lib.m.StepperStep`** with a `label` and `description`, and content passed as children.
 - **The inputs map to the function's arguments**:
   - the area will come from the user's feature selection on the map via click
-  - a `lib.m.Slider` ([Mantine Slider]()) collects precipitation;
-  - two `lib.m.Select`s ([Mantine Select]()) collect the soil group and land use. Their `data`/`min`/`max` mirror what `calculate_runoff` expects.
+  - a `lib.m.Slider` ([Mantine Slider](https://mantine.dev/core/slider/)) collects precipitation;
+  - two `lib.m.Select`s ([Mantine Select](https://mantine.dev/core/select/)) collect the soil group and land use. Their `data`/`min`/`max` mirror what `calculate_runoff` expects.
 - **Static for now.** Nothing updates yet — there's no state and no handlers. The slider and selects don't remember their values, and the active step never changes.
 
 ## Full `home()` so far
